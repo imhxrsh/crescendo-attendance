@@ -6,19 +6,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['id'])) {
         $id = mysqli_real_escape_string($conn, $_POST['id']);
 
-        $sql = "UPDATE `participants` SET `attendance` = '1' WHERE `id` = '$id'";
+        $sql = "UPDATE `participants` SET `attendance` = '1' WHERE `id` = '$id' AND 'event' = 'elexathon'";
         if (mysqli_query($conn, $sql)) {
-            echo "Attendance updated successfully.";
+            echo '{
+    "success": true,
+    "message": "Attendance updated successfully."
+}
+              ';
         } else {
-            echo "Error updating attendance: " . mysqli_error($conn);
+            echo '{
+    "success": false,
+    "errpr": "Error updating attendance"
+}';
         }
     } else {
-        echo "Error: 'id' parameter is required.";
+        echo '{
+    "success": false,
+    "error": "Error: id parameter is required."
+}';
     }
 } else {
-    echo "Error: Only POST requests are allowed.";
+    echo '{
+    "success": false,
+    "error": "Error: Only POST requests are allowed."
+}';
 }
 
 mysqli_close($conn);
-
-?>
