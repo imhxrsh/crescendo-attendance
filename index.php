@@ -11,11 +11,11 @@ $elex_registrations = mysqli_num_rows($select_elex);
 $select_mech = mysqli_query($conn, "SELECT * FROM `participants` WHERE event = 'mechathon'") or die('query failed');
 $mech_registrations = mysqli_num_rows($select_mech);
 
-$select_elex_attended = mysqli_query($conn, "SELECT * FROM `participants` WHERE event = 'elexathon' AND attendance = '1'") or die('query failed');
-$elex_attended = mysqli_num_rows($select_elex);
+$select_elex_attended = mysqli_query($conn, "SELECT * FROM `participants` WHERE event = 'elexathon' AND attendance = '1';") or die('query failed');
+$elex_attended = mysqli_num_rows($select_elex_attended);
 
-$select_mech_attended = mysqli_query($conn, "SELECT * FROM `participants` WHERE event = 'mechathon' AND attendance = '1'") or die('query failed');
-$mech_attended = mysqli_num_rows($select_mech);
+$select_mech_attended = mysqli_query($conn, "SELECT * FROM `participants` WHERE event = 'mechathon' AND attendance = '1';") or die('query failed');
+$mech_attended = mysqli_num_rows($select_mech_attended);
 ?>
 
 <!DOCTYPE html>

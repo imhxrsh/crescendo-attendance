@@ -31,7 +31,7 @@ export default function App() {
     })();
   }, []);
 
-  const handleOptionSelected = (link, optionName) => {
+  const handleOptionSelected = (link, optionName, action) => {
     setApiLink(link);
     setSelectedOption(optionName);
     setScreen("scanner");
@@ -40,13 +40,12 @@ export default function App() {
   const handleBarCodeScanned = async ({ data }) => {
     setScanData(data);
     setScreen("result");
-    console.log(
-      `Participant with ${data} has been scanned!`
-    );
+    console.log(`Participant with ${data} has been scanned!`);
 
     try {
       const formData = new FormData();
       formData.append("id", data);
+      formData.append("action", selectedOption.toLowerCase());
 
       const response = await fetch(apiLink, {
         method: "POST",
@@ -117,7 +116,12 @@ export default function App() {
       {screen === "scanner" && (
         <View style={styles.scanner}>
           <Text
-            style={[styles.whiteText, styles.padding, styles.fontMontserrat, styles.scannerTitleText]}
+            style={[
+              styles.whiteText,
+              styles.padding,
+              styles.fontMontserrat,
+              styles.scannerTitleText,
+            ]}
           >
             Scanning for: {selectedOption}
           </Text>
@@ -212,12 +216,12 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 40,
-    fontWeight: '800',
+    fontWeight: "800",
     color: "#FFFFFF",
     marginBottom: 50,
-    alignContent: 'center',
-    textAlign: 'center',
-    justifyContent: 'center',
+    alignContent: "center",
+    textAlign: "center",
+    justifyContent: "center",
   },
   footer: {
     position: "absolute",
@@ -239,5 +243,5 @@ const styles = StyleSheet.create({
   },
   scannerTitleText: {
     paddingTop: 40,
-  }
+  },
 });
