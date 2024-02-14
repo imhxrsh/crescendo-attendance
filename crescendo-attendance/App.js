@@ -52,7 +52,6 @@ export default function App() {
 
     try {
       const formData = new FormData();
-      formData.append("action", "hadfood");
       formData.append("id", data);
 
       const response = await fetch(apiLink, {

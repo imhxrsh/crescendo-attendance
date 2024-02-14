@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['id'])) {
         $id = mysqli_real_escape_string($conn, $_POST['id']);
 
-        $sql = "UPDATE `participants` SET `attendance` = '1' WHERE `id` = '$id' AND 'event' = 'elexathon'";
+        $sql = "UPDATE `participants` SET `attendance` = '1' WHERE `id` = ' . $id . ' AND 'event' = 'elexathon'";
         if (mysqli_query($conn, $sql)) {
             echo '{
     "success": true,
