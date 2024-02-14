@@ -8,5 +8,5 @@ for i in range(1, 3):
         f"{code}.png",  # Save with the code as part of the filename
         scale=5,
         light="white",
-        dark="lightgreen",
+        dark="blue",
     )
