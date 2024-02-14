@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "crescendo-attendance",
+    "name": "Crescendo Attendance",
     "slug": "crescendo-attendance",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -21,10 +21,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.itsmehxrsh.crescendoattendance"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "657185fe-d0a2-41e8-a85d-1cdfcff47b51"
+      }
     }
   }
 }

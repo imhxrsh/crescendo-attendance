@@ -37,7 +37,7 @@ export default function App() {
     setScreen("scanner");
   };
 
-  const handleBarCodeScanned = async ({ type, data }) => {
+  const handleBarCodeScanned = async ({ data }) => {
     setScanData(data);
     setScreen("result");
     console.log(
@@ -117,7 +117,7 @@ export default function App() {
       {screen === "scanner" && (
         <View style={styles.scanner}>
           <Text
-            style={[styles.whiteText, styles.padding, styles.fontMontserrat]}
+            style={[styles.whiteText, styles.padding, styles.fontMontserrat, styles.scannerTitleText]}
           >
             Scanning for: {selectedOption}
           </Text>
@@ -212,13 +212,16 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 40,
-    fontWeight: "bold",
+    fontWeight: '800',
     color: "#FFFFFF",
     marginBottom: 50,
+    alignContent: 'center',
+    textAlign: 'center',
+    justifyContent: 'center',
   },
   footer: {
     position: "absolute",
-    bottom: 10,
+    bottom: 20,
     width: "100%",
     alignItems: "center",
     justifyContent: "center",
@@ -234,4 +237,7 @@ const styles = StyleSheet.create({
   fontMontserrat: {
     fontFamily: "montserrat-regular",
   },
+  scannerTitleText: {
+    paddingTop: 40,
+  }
 });
