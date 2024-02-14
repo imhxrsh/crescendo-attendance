@@ -11,8 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo '{
     "success": true,
     "message": "Attendance updated successfully."
-}
-              ';
+}';
         } else {
             echo '{
     "success": false,
