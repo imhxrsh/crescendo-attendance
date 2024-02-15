@@ -51,6 +51,7 @@ export default function App() {
     try {
       const formData = new FormData();
       formData.append("id", data);
+      formData.append("event", selectedOption);
   
       const response = await fetch(apiLink, {
         method: "POST",
@@ -63,12 +64,10 @@ export default function App() {
   
       if (response.ok) {
         const responseData = await response.json();
-        // Update the state with the response data you want to display
-        // For example, assuming the response data has a key named "information"
+        console.log("Response from API:", responseData); // Check the response in the console
         setScanData(responseData.information);
       } else {
         console.error("Error:", response.status);
-        // Handle error cases if needed
       }
     } catch (error) {
       console.error("Error sending POST request:", error);
@@ -95,11 +94,22 @@ export default function App() {
           </Text>
           <View style={styles.options}>
             <Button
-              title="Registrations"
+              title="Mech-a-thon"
               onPress={() =>
                 handleOptionSelected(
                   "https://crescendo.hxrsh.tech/api/registrations",
-                  "Registrations"
+                  "MECH-A-THON"
+                )
+              }
+              style={styles.button}
+            />
+            <View style={styles.buttonMargin} />
+            <Button
+              title="Elex-a-thon"
+              onPress={() =>
+                handleOptionSelected(
+                  "https://crescendo.hxrsh.tech/api/registrations",
+                  "ELEX-A-THON"
                 )
               }
               style={styles.button}
@@ -121,7 +131,12 @@ export default function App() {
       {screen === "scanner" && (
         <View style={styles.scanner}>
           <Text
-            style={[styles.whiteText, styles.padding, styles.fontMontserrat, styles.scannerTitleText]}
+            style={[
+              styles.whiteText,
+              styles.padding,
+              styles.fontMontserrat,
+              styles.scannerTitleText,
+            ]}
           >
             Scanning for: {selectedOption}
           </Text>
@@ -137,22 +152,36 @@ export default function App() {
       )}
       {screen === "result" && (
         <View style={styles.result}>
-          <Text style={[styles.whiteText, styles.fontMontserrat, styles.padding]}>
-            Scanned data: {scanData}, This Participant has been marked present!
+          <Text
+            style={[styles.whiteText, styles.fontMontserrat, styles.padding]}
+          >
+            {scanData ? (
+              <>
+                <Text>Scanned data:</Text>
+                {"\n"}
+                {"\n"}
+                <Text>ID: {scanData.id}</Text>
+                {"\n"}
+                <Text>Name: {scanData.name}</Text>
+                {"\n"}
+                <Text>Event: {scanData.event}</Text>
+              </>
+            ) : (
+              <Text>No data available</Text>
+            )}
           </Text>
           <View style={styles.buttonMargin} />
           <Button title="Scan Again" onPress={resetScan} color="#2196f3" />
         </View>
       )}
+
       {screen === "options" && (
         <View style={styles.footer}>
           <Text style={[styles.footerText, styles.fontMontserrat]}>
             Developed and Designed by{" "}
             <Text
               style={[styles.link, styles.fontMontserrat]}
-              onPress={() =>
-                Linking.openURL("https://github.com/imhxrsh")
-              }
+              onPress={() => Linking.openURL("https://github.com/imhxrsh")}
             >
               Harsh Vishwakarma
             </Text>
@@ -216,12 +245,12 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 40,
-    fontWeight: '800',
+    fontWeight: "800",
     color: "#FFFFFF",
     marginBottom: 50,
-    alignContent: 'center',
-    textAlign: 'center',
-    justifyContent: 'center',
+    alignContent: "center",
+    textAlign: "center",
+    justifyContent: "center",
   },
   footer: {
     position: "absolute",
@@ -243,5 +272,5 @@ const styles = StyleSheet.create({
   },
   scannerTitleText: {
     paddingTop: 40,
-  }
+  },
 });
