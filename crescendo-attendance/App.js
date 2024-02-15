@@ -89,7 +89,7 @@ export default function App() {
               title="Mech-a-thon"
               onPress={() =>
                 handleOptionSelected(
-                  "https://crescendo.hxrsh.tech/api/mechathon.php",
+                  "https://crescendo.hxrsh.tech/api/mechathon",
                   "Mech-a-thon"
                 )
               }
@@ -100,7 +100,7 @@ export default function App() {
               title="Elex-a-thon"
               onPress={() =>
                 handleOptionSelected(
-                  "https://crescendo.hxrsh.tech/api/elexathon.php",
+                  "https://crescendo.hxrsh.tech/api/elexathon",
                   "Elex-a-thon"
                 )
               }
@@ -111,7 +111,7 @@ export default function App() {
               title="Food"
               onPress={() =>
                 handleFoodOptionSelected(
-                  "https://crescendo.hxrsh.tech/api/food.php",
+                  "https://crescendo.hxrsh.tech/api/food",
                   "Food"
                 )
               }

@@ -1,4 +1,15 @@
 <?php
+session_start();
+if (isset($_SESSION["email"])) {
+    $isLoggedIn = true;
+} else {
+    $isLoggedIn = false;
+}
+
+if (!$isLoggedIn) {
+    header("Location: login?error=notLoggedIn");
+}
+
 include('config.php');
 
 if (!$conn) {

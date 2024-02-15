@@ -1,20 +1,33 @@
 <?php
+session_start();
+if (isset($_SESSION["email"])) {
+    $isLoggedIn = true;
+} else {
+    $isLoggedIn = false;
+}
+
+if (!$isLoggedIn) {
+    header("Location: login?error=notLoggedIn");
+}
+
 include('config.php');
 
 if (!$conn) {
     die('Connection failed: ' . mysqli_connect_error());
 }
 
-$select_elex = mysqli_query($conn, "SELECT * FROM `participants` WHERE event = 'elexathon'") or die('query failed');
+
+
+$select_elex = mysqli_query($conn, "SELECT * FROM `participants` WHERE event = 'ELEX-A-THON'") or die('query failed');
 $elex_registrations = mysqli_num_rows($select_elex);
 
-$select_mech = mysqli_query($conn, "SELECT * FROM `participants` WHERE event = 'mechathon'") or die('query failed');
+$select_mech = mysqli_query($conn, "SELECT * FROM `participants` WHERE event = 'MECH-A-THON'") or die('query failed');
 $mech_registrations = mysqli_num_rows($select_mech);
 
-$select_elex_attended = mysqli_query($conn, "SELECT * FROM `participants` WHERE event = 'elexathon' AND attendance = '1';") or die('query failed');
+$select_elex_attended = mysqli_query($conn, "SELECT * FROM `participants` WHERE event = 'ELEX-A-THON' AND attendance = '1';") or die('query failed');
 $elex_attended = mysqli_num_rows($select_elex_attended);
 
-$select_mech_attended = mysqli_query($conn, "SELECT * FROM `participants` WHERE event = 'mechathon' AND attendance = '1';") or die('query failed');
+$select_mech_attended = mysqli_query($conn, "SELECT * FROM `participants` WHERE event = 'MECH-A-THON' AND attendance = '1';") or die('query failed');
 $mech_attended = mysqli_num_rows($select_mech_attended);
 ?>
 

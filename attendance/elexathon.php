@@ -1,11 +1,21 @@
 <?php
+session_start();
+if (isset($_SESSION["email"])) {
+    $isLoggedIn = true;
+} else {
+    $isLoggedIn = false;
+}
+
+if (!$isLoggedIn) {
+    header("Location: /login?error=notLoggedIn");
+}
 include('../config.php');
 
 if (!$conn) {
     die('Connection failed: ' . mysqli_connect_error());
 }
 
-$select_elex_registrations = mysqli_query($conn, "SELECT * FROM `participants` WHERE event = 'elexathon'") or die('query failed');
+$select_elex_registrations = mysqli_query($conn, "SELECT * FROM `participants` WHERE event = 'ELEX-A-THON'") or die('query failed');
 $elex_registrations = mysqli_num_rows($select_elex_registrations);
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action'])) {
@@ -72,7 +82,7 @@ session_start();
                                         </tr>
                                     </thead>
                                     <?php
-                                    $select_users = mysqli_query($conn, "SELECT * FROM `participants` WHERE event = 'elexathon' ORDER BY `id` ASC") or die('query failed');
+                                    $select_users = mysqli_query($conn, "SELECT * FROM `participants` WHERE event = 'ELEX-A-THON' ORDER BY `id` ASC") or die('query failed');
                                     if (mysqli_num_rows($select_users) > 0) {
                                         while ($fetch_users = mysqli_fetch_assoc($select_users)) {
                                     ?>
