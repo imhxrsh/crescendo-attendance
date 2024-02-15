@@ -64,7 +64,7 @@ export default function App() {
   
       if (response.ok) {
         const responseData = await response.json();
-        console.log("Response from API:", responseData); // Check the response in the console
+        console.log("Response from API:", responseData);
         setScanData(responseData.information);
       } else {
         console.error("Error:", response.status);
