@@ -46,14 +46,12 @@ export default function App() {
   const handleBarCodeScanned = async ({ data }) => {
     setScanData(data);
     setScreen("result");
-    console.log(
-      `Participant with ${data} has been scanned!`
-    );
-
+    console.log(`Participant with ${data} has been scanned!`);
+  
     try {
       const formData = new FormData();
       formData.append("id", data);
-
+  
       const response = await fetch(apiLink, {
         method: "POST",
         headers: {
@@ -62,10 +60,21 @@ export default function App() {
         },
         body: formData,
       });
+  
+      if (response.ok) {
+        const responseData = await response.json();
+        // Update the state with the response data you want to display
+        // For example, assuming the response data has a key named "information"
+        setScanData(responseData.information);
+      } else {
+        console.error("Error:", response.status);
+        // Handle error cases if needed
+      }
     } catch (error) {
       console.error("Error sending POST request:", error);
     }
   };
+  
 
   const resetScan = () => {
     setScanData(null);
@@ -86,22 +95,11 @@ export default function App() {
           </Text>
           <View style={styles.options}>
             <Button
-              title="Mech-a-thon"
+              title="Registrations"
               onPress={() =>
                 handleOptionSelected(
-                  "https://crescendo.hxrsh.tech/api/mechathon",
-                  "Mech-a-thon"
-                )
-              }
-              style={styles.button}
-            />
-            <View style={styles.buttonMargin} />
-            <Button
-              title="Elex-a-thon"
-              onPress={() =>
-                handleOptionSelected(
-                  "https://crescendo.hxrsh.tech/api/elexathon",
-                  "Elex-a-thon"
+                  "https://crescendo.hxrsh.tech/api/registrations",
+                  "Registrations"
                 )
               }
               style={styles.button}
