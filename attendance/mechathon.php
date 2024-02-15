@@ -97,8 +97,8 @@ session_start();
                                                     <td><b><?php echo $fetch_users['id']; ?></b></th>
                                                     <td><?php echo ($fetch_users['name']); ?></td>
                                                     <td>
-                                                        <a href="?action=approve&id=<?php echo $fetch_users['id']; ?>" style="color: #000;"><i class="bi bi-check-lg m-2"></i></a>
-                                                        <a href="?action=cancel&id=<?php echo $fetch_users['id']; ?>" style="color: #000;"><i class="bi bi-x-lg m-2"></i></a>
+                                                        <a href="?action=approve&id=<?php echo $fetch_users['id']; ?>" style="color: #fff;"><i class="bi bi-check-lg m-2"></i></a>
+                                                        <a href="?action=cancel&id=<?php echo $fetch_users['id']; ?>" style="color: #fff;"><i class="bi bi-x-lg m-2"></i></a>
                                                     </td>
                                                 </tr>
                                             </tbody>
