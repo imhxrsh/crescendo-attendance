@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $fetched_id = $row['id'];
             $fetched_event = $row['event'];
 
-            $sql = "UPDATE `participants` SET `attendance` = '1' WHERE `participants`.`id` = '$id';";
+            $sql = "UPDATE `participants` SET `attendance` = '1' WHERE `id` = '$id';";
             if (mysqli_query($conn, $sql)) {
                 echo '{
     "status": true,
