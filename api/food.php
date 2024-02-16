@@ -23,32 +23,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
 
     switch ($action) {
         case 'hadfood':
-            $currfood = mysqli_query($conn, "SELECT * FROM `participants` WHERE id = '$id'") or die('Query failed');
-            $row = mysqli_fetch_assoc($currfood);
-            $currValue = $row['food'];
-
-            $newValue = $currValue + 1;
-
-            mysqli_query($conn, "UPDATE `participants` SET `food` = '$newValue' WHERE `id` = '$id'") or die('Query failed');
-            echo '{
-    "status": true,
-    "message": "Food updated successfully.",
-    "information": {
-        "id": "' . $row['id'] . '",
-        "name": "' . $row['name'] . '",
-        "event": "' . $row['event'] . '",
-        "food": ' . $newValue . '
-    }
-}';
-            break;
-
         case 'removefood':
-            $currfood = mysqli_query($conn, "SELECT * FROM `participants` WHERE id = '$id'") or die('Query failed');
-            $row = mysqli_fetch_assoc($currfood);
-            $currValue = $row['food'];
+            // Check if attendance is not NULL or "Absent"
+            $attendance_query = mysqli_query($conn, "SELECT attendance FROM `participants` WHERE id = '$id'");
+            $attendance_row = mysqli_fetch_assoc($attendance_query);
+            $attendance_status = $attendance_row['attendance'];
+            if ($attendance_status !== NULL && $attendance_status !== "0") {
+                $currfood = mysqli_query($conn, "SELECT * FROM `participants` WHERE id = '$id'") or die('Query failed');
+                $row = mysqli_fetch_assoc($currfood);
+                $currValue = $row['food'];
 
-            if ($currValue > 0) {
-                $newValue = $currValue - 1;
+                if ($action === 'hadfood') {
+                    $newValue = $currValue + 1;
+                } elseif ($action === 'removefood' && $currValue > 0) {
+                    $newValue = $currValue - 1;
+                } else {
+                    echo '{
+    "status": false,
+    "error": "Participant has no food to remove."
+}';
+                    exit;
+                }
 
                 mysqli_query($conn, "UPDATE `participants` SET `food` = '$newValue' WHERE `id` = '$id'") or die('Query failed');
                 echo '{
@@ -64,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             } else {
                 echo '{
     "status": false,
-    "error": "Participant has no food to remove."
+    "error": "Participant has NULL attendance or is marked as Absent."
 }';
             }
             break;
@@ -98,4 +93,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
 }
 
 mysqli_close($conn);
-?>

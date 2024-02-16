@@ -70,9 +70,13 @@ export default function App() {
         setScanData(responseData.information);
       } else {
         console.error("Error:", response.status);
+        // Set scanData to null in case of an error
+        setScanData(null);
       }
     } catch (error) {
       console.error("Error sending POST request:", error);
+      // Set scanData to null in case of an error
+      setScanData(null);
     }
   };
 
