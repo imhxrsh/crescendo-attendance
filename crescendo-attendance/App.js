@@ -52,6 +52,7 @@ export default function App() {
       const formData = new FormData();
       formData.append("id", data);
       formData.append("event", selectedOption);
+      formData.append("action", "hadfood")
   
       const response = await fetch(apiLink, {
         method: "POST",
@@ -61,10 +62,11 @@ export default function App() {
         },
         body: formData,
       });
-  
+
+      const responseData = await response.json();
+      console.log("Response from API:", responseData);
+
       if (response.ok) {
-        const responseData = await response.json();
-        console.log("Response from API:", responseData);
         setScanData(responseData.information);
       } else {
         console.error("Error:", response.status);
@@ -73,7 +75,6 @@ export default function App() {
       console.error("Error sending POST request:", error);
     }
   };
-  
 
   const resetScan = () => {
     setScanData(null);
@@ -165,6 +166,8 @@ export default function App() {
                 <Text>Name: {scanData.name}</Text>
                 {"\n"}
                 <Text>Event: {scanData.event}</Text>
+                {"\n"}
+                <Text>Food: {scanData.food}</Text>
               </>
             ) : (
               <Text>No data available</Text>
