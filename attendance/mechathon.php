@@ -30,11 +30,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action'])) {
         case 'cancel':
             mysqli_query($conn, "UPDATE `participants` SET `attendance` = '0' WHERE `id` = '$id'") or die('Query failed');
             break;
-        
+
         case 'wipe':
             mysqli_query($conn, "UPDATE `participants` SET `attendance` = NULL WHERE `id` = '$id'") or die('Query failed');
             break;
-            
+
         default:
             echo "Invalid action.";
             break;
@@ -50,7 +50,7 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Attendance - Mech-a-Thon</title>
+    <title>Attendance - Mech-A-Thon</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 </head>
@@ -60,7 +60,7 @@ session_start();
     <div class="container">
         <div class="row justify-content-center py-5">
             <div class="text-center mb-5">
-                <h1>Dashboard - Mech-a-Thon</h1>
+                <h1>Dashboard - MECH-A-THON</h1>
             </div>
 
             <div class="d-flex flex-column col-lg-10 col-md-10 col-12 text-center justify-content-center align-items-center m-2">
@@ -87,9 +87,9 @@ session_start();
                                         while ($fetch_users = mysqli_fetch_assoc($select_users)) {
                                     ?>
                                             <tbody>
-                                                <tr <?php if ($fetch_users['attendance'] == 'true') {
+                                                <tr <?php if ($fetch_users['attendance'] == '1') {
                                                         echo 'class="table-success"';
-                                                    } elseif ($fetch_users['attendance'] == 'false') {
+                                                    } elseif ($fetch_users['attendance'] == '0') {
                                                         echo 'class="table-danger"';
                                                     } else {
                                                         echo '';
