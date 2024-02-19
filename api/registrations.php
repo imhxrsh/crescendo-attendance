@@ -2,7 +2,7 @@
 require_once '../config.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['id']) && isset($_POST['event']) && ($_POST['event'] === 'ELEX-A-THON' || $_POST['event'] === 'MECH-A-THON' || $_POST['event'] === 'HACKATHON')) {
+    if (isset($_POST['id']) && isset($_POST['event']) && ($_POST['event'] === 'ELEX-A-THON' || $_POST['event'] === 'MECH-A-THON' || $_POST['event'] === 'HACK-A-THON')) {
         $id = mysqli_real_escape_string($conn, $_POST['id']);
         $event = mysqli_real_escape_string($conn, $_POST['event']);
 
@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         echo '{
     "status": false,
-    "error": "Error: id and event parameters are required and event parameter must be either ELEX-A-THON, MECH-A-THON, or HACKATHON."
+    "error": "Error: id and event parameters are required and event parameter must be either ELEX-A-THON, MECH-A-THON, or HACK-A-THON."
 }';
     }
 } else {
