@@ -24,11 +24,18 @@ $elex_registrations = mysqli_num_rows($select_elex);
 $select_mech = mysqli_query($conn, "SELECT * FROM `participants` WHERE event = 'MECH-A-THON'") or die('query failed');
 $mech_registrations = mysqli_num_rows($select_mech);
 
+$select_hack = mysqli_query($conn, "SELECT * FROM `participants` WHERE event = 'HACK-A-THON'") or die('query failed');
+$hack_registrations = mysqli_num_rows($select_hack);
+
 $select_elex_attended = mysqli_query($conn, "SELECT * FROM `participants` WHERE event = 'ELEX-A-THON' AND attendance = '1';") or die('query failed');
 $elex_attended = mysqli_num_rows($select_elex_attended);
 
 $select_mech_attended = mysqli_query($conn, "SELECT * FROM `participants` WHERE event = 'MECH-A-THON' AND attendance = '1';") or die('query failed');
 $mech_attended = mysqli_num_rows($select_mech_attended);
+
+$select_hack_attended = mysqli_query($conn, "SELECT * FROM `participants` WHERE event = 'HACK-A-THON' AND attendance = '1';") or die('query failed');
+$hack_attended = mysqli_num_rows($select_mech_attended);
+
 ?>
 
 <!DOCTYPE html>
@@ -48,9 +55,9 @@ $mech_attended = mysqli_num_rows($select_mech_attended);
             <div class="text-center mb-5">
                 <h1>Dashboard</h1>
             </div>
-            <div class="d-flex flex-column col-lg-6 text-center justify-content-center align-items-center">
+            <div class="d-flex flex-column col-lg-4 text-center justify-content-center align-items-center mt-3">
                 <h2>Elex-a-thon</h2>
-                <div class="text-center col-lg-6 col-md-8 col-sm-10 col-10 mt-2">
+                <div class="text-center col-lg-10 col-md-8 col-sm-10 col-10 mt-2">
                     <div class="card" style="height: 10rem;">
                         <div class="card-body mt-4">
                             <h5 class="card-title">Registered</h5>
@@ -62,7 +69,7 @@ $mech_attended = mysqli_num_rows($select_mech_attended);
                         </div>
                     </div>
                 </div>
-                <div class="text-center col-lg-6 col-md-8 col-sm-10 col-10 mt-2">
+                <div class="text-center col-lg-10 col-md-8 col-sm-10 col-10 mt-2">
                     <div class="card" style="height: 10rem;">
                         <div class="card-body mt-4">
                             <h5 class="card-title">Attended</h5>
@@ -75,9 +82,9 @@ $mech_attended = mysqli_num_rows($select_mech_attended);
                     </div>
                 </div>
             </div>
-            <div class="d-flex flex-column col-lg-6 text-center justify-content-center align-items-center">
+            <div class="d-flex flex-column col-lg-4 text-center justify-content-center align-items-center mt-3">
                 <h2>Mech-a-thon</h2>
-                <div class="text-center col-lg-6 col-md-8 col-sm-10 col-10 mt-2">
+                <div class="text-center col-lg-10 col-md-8 col-sm-10 col-10 mt-2">
                     <div class="card" style="height: 10rem;">
                         <div class="card-body mt-4">
                             <h5 class="card-title">Registered</h5>
@@ -89,13 +96,40 @@ $mech_attended = mysqli_num_rows($select_mech_attended);
                         </div>
                     </div>
                 </div>
-                <div class="text-center col-lg-6 col-md-8 col-sm-10 col-10 mt-2">
+                <div class="text-center col-lg-10 col-md-8 col-sm-10 col-10 mt-2">
                     <div class="card" style="height: 10rem;">
                         <div class="card-body mt-4">
                             <h5 class="card-title">Attended</h5>
                             <p class="card-text mt-2">
                                 <?php
                                 echo $mech_attended;
+                                ?>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex flex-column col-lg-4 text-center justify-content-center align-items-center mt-3">
+                <h2>Hack-a-thon</h2>
+                <div class="text-center col-lg-10 col-md-8 col-sm-10 col-10 mt-2">
+                    <div class="card" style="height: 10rem;">
+                        <div class="card-body mt-4">
+                            <h5 class="card-title">Registered</h5>
+                            <p class="card-text mt-2">
+                                <?php
+                                echo $hack_registrations;
+                                ?>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center col-lg-10 col-md-8 col-sm-10 col-10 mt-2">
+                    <div class="card" style="height: 10rem;">
+                        <div class="card-body mt-4">
+                            <h5 class="card-title">Attended</h5>
+                            <p class="card-text mt-2">
+                                <?php
+                                echo $hack_attended;
                                 ?>
                             </p>
                         </div>
