@@ -121,6 +121,17 @@ export default function App() {
             />
             <View style={styles.buttonMargin} />
             <Button
+              title="Hack-a-thon"
+              onPress={() =>
+                handleOptionSelected(
+                  "https://crescendo.hxrsh.tech/api/registrations",
+                  "HACK-A-THON"
+                )
+              }
+              style={styles.button}
+            />
+            <View style={styles.buttonMargin} />
+            <Button
               title="Food"
               onPress={() =>
                 handleFoodOptionSelected(
@@ -130,6 +141,7 @@ export default function App() {
               }
               style={styles.button}
             />
+            <View style={styles.buttonMargin} />
           </View>
         </View>
       )}

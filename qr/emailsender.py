@@ -5,12 +5,13 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
 # SMTP server configuration
-smtp_server = 'mail.smtp2go.com'
-smtp_port = 587
-smtp_username = 'crescendo.hxrsh.tech'
-smtp_password = 'fury@1337'
+smtp_server = 'email-smtp.ap-south-1.amazonaws.com'
+smtp_port = 587  # Choose one of the ports: 25, 587, or 2587
+smtp_username = 'AKIAUCJB4IREAN7YN34F'  # Your SMTP username provided by Amazon SES
+smtp_password = 'BB+xso+iRAOq+yrz4ZIOf3q79FbuartlBPhR47t88Dle'  # Your SMTP password provided by Amazon SES
 
 print(f'Script Started')
+
 # Load registration data from CSV
 file_path = 'participants.csv'
 
@@ -29,7 +30,7 @@ def read_html_content(filename):
 
 # Send email with HTML content
 def send_registration_email(sender, recipient, id, name, qr, event, html_content, reply_to):
-    subject = f"Registration for {name} at {event} 2024"
+    subject = f"Registration for {name} at Crescendo {event} 2024"
     body_html = html_content.replace('{id}', id).replace('{name}', name).replace('{event}', event).replace('{QRImage}', qr)
 
     message = MIMEMultipart()
@@ -53,7 +54,7 @@ registrations_data = load_data_from_csv(file_path)
 html_content = read_html_content('email.html')
 
 # Set the number of emails to send per hour
-emails_per_hour = 200
+emails_per_hour = 3000
 
 # Calculate the time interval in seconds for sending each batch of emails
 time_interval = 3600 / emails_per_hour
