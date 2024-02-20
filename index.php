@@ -34,7 +34,7 @@ $select_mech_attended = mysqli_query($conn, "SELECT * FROM `participants` WHERE 
 $mech_attended = mysqli_num_rows($select_mech_attended);
 
 $select_hack_attended = mysqli_query($conn, "SELECT * FROM `participants` WHERE event = 'HACK-A-THON' AND attendance = '1';") or die('query failed');
-$hack_attended = mysqli_num_rows($select_mech_attended);
+$hack_attended = mysqli_num_rows($select_hack_attended);
 
 ?>
 
